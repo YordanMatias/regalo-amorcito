@@ -6,6 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Tienes una sorpresa 🎁</title>
 <meta name="description" content="Desliza y descubre tu regalo...">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎁</text></svg>">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Tienes una sorpresa 🎁">
 <meta property="og:description" content="Toca para ver tu regalo...">
@@ -297,10 +298,6 @@
     0%,100%{filter:drop-shadow(0 0 4px rgba(255,183,77,.25)) drop-shadow(0 0 0px rgba(255,90,140,0));}
     50%{filter:drop-shadow(0 0 18px rgba(255,197,90,.95)) drop-shadow(0 0 34px rgba(255,90,140,.65));}
   }
-  @keyframes rebote{
-    0%,100%{transform:translate(-50%,0);}
-    50%{transform:translate(-50%,6px);}
-  }
   @keyframes rebote-vertical{
     0%,100%{transform:translateY(0);}
     50%{transform:translateY(6px);}
@@ -491,36 +488,6 @@
   .ticket::before{ left:-10px; }
   .ticket::after{ right:-10px; }
 
-  /* info del evento */
-  .info-card{
-    background:rgba(0,0,0,.2);
-    border:1px solid rgba(245,220,166,.35);
-    border-radius:18px;
-    overflow:hidden;
-    text-align:left;
-  }
-  .info-row{
-    display:flex;
-    justify-content:space-between;
-    gap:12px;
-    padding:14px 20px;
-    border-bottom:1px solid rgba(245,220,166,.18);
-  }
-  .info-row:last-child{ border-bottom:none; }
-  .info-label{
-    font-family:"Oswald", sans-serif;
-    font-weight:600;
-    color:var(--gold-2);
-    letter-spacing:.04em;
-    text-transform:uppercase;
-    font-size:.85rem;
-    white-space:nowrap;
-  }
-  .info-value{
-    text-align:right;
-    font-weight:500;
-    color:var(--white);
-  }
 
   footer{
     text-align:center;
