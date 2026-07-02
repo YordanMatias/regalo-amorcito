@@ -377,7 +377,7 @@
   }
 
   @media (prefers-reduced-motion: reduce){
-    .confetti,.balloon,.sparkle,.couple-photo,.ticket,.cd-box{ animation:none !important; }
+    .confetti,.balloon,.sparkle,.couple-photo,.ticket,.cd-box,.mensaje-titulo{ animation:none !important; }
   }
 
   section.card-section > *:not(.confetti):not(.balloon):not(.sparkle){
@@ -401,6 +401,13 @@
     color:var(--gold-2);
     margin-bottom:18px;
   }
+  .mensaje-titulo{
+    animation:titulo-brillo 2.6s ease-in-out infinite;
+  }
+  @keyframes titulo-brillo{
+    0%,100%{ text-shadow:0 0 4px rgba(255,197,90,.25); }
+    50%{ text-shadow:0 0 16px rgba(255,197,90,.85), 0 0 28px rgba(255,90,140,.4); }
+  }
   .custom-text{
     font-size:1.05rem;
     line-height:1.7;
@@ -420,12 +427,11 @@
     background:var(--white);
     padding:10px 10px 24px;
     border-radius:6px;
-    box-shadow:0 12px 24px rgba(0,0,0,.35);
     animation:photo-sway 5s ease-in-out infinite;
   }
   @keyframes photo-sway{
-    0%,100%{ transform:rotate(-3deg) translateY(0); }
-    50%{ transform:rotate(-1deg) translateY(-5px); }
+    0%,100%{ transform:rotate(-3deg) translateY(0); box-shadow:0 12px 24px rgba(0,0,0,.35), 0 0 0 rgba(252,213,125,0); }
+    50%{ transform:rotate(-1deg) translateY(-5px); box-shadow:0 16px 30px rgba(0,0,0,.35), 0 0 22px rgba(252,213,125,.45); }
   }
   .couple-photo img{
     width:100%;
@@ -808,9 +814,8 @@
     <span class="sparkle s2">✨</span>
     <span class="sparkle s3">✨</span>
     <span class="sparkle s4">✨</span>
-    <div class="gift-icon">🎁</div>
     <div class="divider"></div>
-    <h2>¡Feliz cumpleaños mi vida!</h2>
+    <h2 class="mensaje-titulo">¡Feliz cumpleaños mi vida!</h2>
     <div class="couple-photo">
       <img src="foto.jpg" alt="Nosotros dos">
     </div>
