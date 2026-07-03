@@ -64,6 +64,21 @@
     z-index:0;
   }
 
+  /* disuelve el borde inferior de la infografía con el fondo del contenido, sin tapar la placa de datos */
+  .hero-fade{
+    position:relative;
+    height:40px;
+    margin-top:0;
+    pointer-events:none;
+    background:linear-gradient(180deg,
+      rgba(60,15,30,.38) 0%,
+      rgba(60,15,30,0) 100%);
+  }
+  /* la primera sección tras la infografía sube su contenido para no dejar un hueco vacío */
+  .hero-fade + section.card-section{
+    padding-top:16px;
+  }
+
   /* logo tour (anillo + logotipo) */
   .logo-evento-wrap{
     position:absolute;
@@ -203,7 +218,7 @@
   /* placa isla con todos los datos del evento, flotando sobre la infografía */
   .event-info-plate{
     position:absolute;
-    bottom:1.6%;
+    bottom:4.5%;
     left:50%;
     width:86%;
     transform:translateX(-50%);
@@ -406,15 +421,33 @@
     50%{ text-shadow:0 0 16px rgba(255,197,90,.85), 0 0 28px rgba(255,90,140,.4); }
   }
   .custom-text{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:120px;
+    margin-bottom:22px;
     font-size:1.05rem;
     line-height:1.7;
     color:var(--white);
     background:rgba(0,0,0,.18);
     border:1px solid rgba(245,220,166,.35);
     border-radius:18px;
-    padding:24px 22px;
-    text-align:left;
+    padding:28px 30px;
+    text-align:center;
     white-space:pre-line;
+    overflow:hidden;
+    animation:texto-glow 3.4s ease-in-out infinite;
+  }
+  @keyframes texto-glow{
+    0%,100%{
+      border-color:rgba(245,220,166,.35);
+      box-shadow:0 0 0 rgba(255,197,90,0);
+    }
+    50%{
+      border-color:rgba(255,197,90,.75);
+      box-shadow:0 0 18px rgba(255,197,90,.3), inset 0 0 14px rgba(255,125,206,.12);
+    }
   }
 
   /* foto de la pareja, estilo polaroid */
@@ -451,17 +484,29 @@
     max-width:240px;
     background:linear-gradient(160deg, #ff7a52, #c72e5e);
     border-radius:14px;
-    padding:20px 16px 22px;
+    padding:20px 16px 14px;
     box-shadow:0 10px 24px rgba(0,0,0,.3);
     border:2px dashed var(--gold);
     animation:ticket-float 3.6s ease-in-out infinite;
   }
   .tickets .ticket:nth-child(2){ animation-delay:.5s; }
   @keyframes ticket-float{
-    0%,100%{ transform:translateY(0); }
-    50%{ transform:translateY(-6px); }
+    0%,100%{ transform:translateY(0) rotate(0deg); }
+    50%{ transform:translateY(-6px) rotate(-1deg); }
   }
-  .ticket .t-icon{ font-size:1.8rem; }
+  .ticket .t-icon{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:52px;
+    height:52px;
+    margin:0 auto 6px;
+    font-size:1.6rem;
+    background:rgba(255,255,255,.14);
+    border:2px solid rgba(245,220,166,.55);
+    border-radius:50%;
+    box-shadow:0 0 12px rgba(252,213,125,.25);
+  }
   .ticket .t-owner{
     font-family:"Oswald", sans-serif;
     font-weight:600;
@@ -470,10 +515,32 @@
     color:var(--white);
   }
   .ticket .t-tag{
-    font-size:.8rem;
-    color:var(--gold);
+    display:inline-block;
+    font-size:.75rem;
+    font-weight:600;
+    color:var(--bg-red-dark);
+    background:var(--gold);
     letter-spacing:.04em;
+    padding:3px 12px;
+    border-radius:20px;
+    margin-top:2px;
   }
+  .ticket .t-stub{
+    margin:14px -16px -14px;
+    padding-top:10px;
+    border-top:2px dashed rgba(255,255,255,.4);
+    display:flex;
+    justify-content:center;
+    gap:3px;
+  }
+  .ticket .t-stub span{
+    display:block;
+    width:3px;
+    height:16px;
+    background:rgba(255,255,255,.3);
+  }
+  .ticket .t-stub span:nth-child(3n){ height:20px; background:rgba(255,255,255,.5); }
+  .ticket .t-stub span:nth-child(5n){ height:12px; }
   .ticket::before,
   .ticket::after{
     content:"";
@@ -484,6 +551,7 @@
     border-radius:50%;
     top:50%;
     transform:translateY(-50%);
+    z-index:1;
   }
   .ticket::before{ left:-10px; }
   .ticket::after{ right:-10px; }
@@ -765,7 +833,9 @@
     </div>
   </section>
 
-  <!-- ============ MENSAJE DE REGALO ============ -->
+  <div class="hero-fade" aria-hidden="true"></div>
+
+  <!-- ============ TITULO + LAS ENTRADAS ============ -->
   <section class="card-section">
     <span class="balloon b1">🎈</span>
     <span class="balloon b2">🎈</span>
@@ -783,15 +853,23 @@
     <span class="sparkle s4">✨</span>
     <div class="divider"></div>
     <h2 class="mensaje-titulo">¡Feliz cumpleaños mi vida!</h2>
-    <div class="couple-photo">
-      <img src="foto.jpg" alt="Nosotros dos">
-    </div>
-    <div class="custom-text">
-Espero que disfrute mucho su regalo mi amor, pueda ver y escuchar a su bichota en vivo. Solo pude conseguir cancha mi amor pero vamos a resistir. Te amo mucho bebe!
+    <div class="tickets">
+      <div class="ticket">
+        <div class="t-icon">💃</div>
+        <div class="t-owner">Una entrada para ti</div>
+        <div class="t-tag">Cancha General</div>
+        <div class="t-stub"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="ticket">
+        <div class="t-icon">🕺</div>
+        <div class="t-owner">Y otra para mí, para acompañarte</div>
+        <div class="t-tag">Cancha General</div>
+        <div class="t-stub"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
     </div>
   </section>
 
-  <!-- ============ LAS ENTRADAS ============ -->
+  <!-- ============ MENSAJE DE REGALO ============ -->
   <section class="card-section">
     <span class="balloon b1">🎈</span>
     <span class="balloon b2">🎈</span>
@@ -800,21 +878,18 @@ Espero que disfrute mucho su regalo mi amor, pueda ver y escuchar a su bichota e
     <span class="confetti c3"></span>
     <span class="confetti c4"></span>
     <span class="confetti c5"></span>
+    <span class="confetti c6"></span>
+    <span class="confetti c7"></span>
     <span class="sparkle s1">✨</span>
     <span class="sparkle s2">✨</span>
-    <div class="gift-icon">🎫</div>
+    <span class="sparkle s3">✨</span>
+    <span class="sparkle s4">✨</span>
     <div class="divider"></div>
-    <div class="tickets">
-      <div class="ticket">
-        <div class="t-icon">💃</div>
-        <div class="t-owner">Una entrada para ti</div>
-        <div class="t-tag">Cancha General</div>
-      </div>
-      <div class="ticket">
-        <div class="t-icon">🕺</div>
-        <div class="t-owner">Y otra para mí, para acompañarte</div>
-        <div class="t-tag">Cancha General</div>
-      </div>
+    <div class="custom-text">
+Espero que sea de su agrado el regalo mi vida, para que pueda ver y escuchar en vivo a la bichota. Solo pude conseguir cancha mi bebe pero vamos a sobrevivir como podamos para que todo sea bonito, te amo mucho amorcito ❤️❤️❤️
+    </div>
+    <div class="couple-photo">
+      <img src="foto.jpg" alt="Nosotros dos">
     </div>
   </section>
 
